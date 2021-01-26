@@ -51,7 +51,20 @@ function sortFavicons(favicons) {
     }
 }
 
-const favicons = getFavicons()
-console.log(sortFavicons(favicons));
 // 3. Convert Favicons to Base64
+async function toBase64(favicon) {
+    const response = await fetch(favicon)
+    const blob = await response.blob()
+    return await fileReader(blob)
+
+    async function fileReader(blob) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.onloadend = () => resolve(reader.result)
+            reader.onerror = reject
+            reader.readAsDataURL(blob)
+        })
+    }
+}
+
 // Test
