@@ -15,6 +15,7 @@ function getFavicons() {
         const origin = new URL(document.URL).origin
 
         if (isURL(href)) return href
+        if (href.startsWith('//')) return 'https:' + href
         return origin + '/' + href
     })
 
