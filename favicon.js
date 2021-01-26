@@ -7,6 +7,15 @@
  * | https://willbc.cn    | assets/images/favicon.png                                      |
  */
 
+// 0. Get HTML from url
+async function getHTML(url) {
+    const response = await fetch(url)
+    const text = await response.text()
+    const parser = new DOMParser()
+    const html = parser.parseFromString(text, 'text/html');
+    return html
+}
+
 // 1. Get favicons in website
 function getFavicons() {
     const links = document.querySelectorAll('link[rel*=icon]')
