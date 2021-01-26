@@ -29,7 +29,10 @@ function getFavicons() {
 
 // 2. Sort Favicons by name and quality.
 function sortFavicons(favicons) {
-    return favicons.map(assignPriority)
+    return favicons
+        .map(assignPriority)
+        .sort(byPriority)
+        .map(removePriority)
 
     function assignPriority(favicon) {
         let priority = 0
@@ -38,6 +41,17 @@ function sortFavicons(favicons) {
 
         return {href: favicon, priority}
     }
+
+    function byPriority(a, b) {
+        return b.priority - a.priority
+    }
+
+    function removePriority(favicon) {
+        return favicon.href
+    }
 }
+
+const favicons = getFavicons()
+console.log(sortFavicons(favicons));
 // 3. Convert Favicons to Base64
 // Test
