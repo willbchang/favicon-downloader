@@ -8,6 +8,11 @@
  */
 
 // 1. Get favicons in website
+function getFavicons() {
+    const links = document.querySelectorAll('link[rel*=icon]')
+    const favicons = [...links].map(link => link.href)
+    console.log(favicons);
+}
 // 2. Sort Favicons by name and quality.
 // 3. Convert Favicons to Base64
 // Test
