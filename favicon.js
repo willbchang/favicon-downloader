@@ -26,7 +26,18 @@ function getFavicons() {
         return /^https?:\/\//.test(url)
     }
 }
-console.log(getFavicons());
+
 // 2. Sort Favicons by name and quality.
+function sortFavicons(favicons) {
+    return favicons.map(assignPriority)
+
+    function assignPriority(favicon) {
+        let priority = 0
+        if (favicon.includes('favicon')) priority += 1
+        if (favicon.includes('32')) priority += 1
+
+        return {href: favicon, priority}
+    }
+}
 // 3. Convert Favicons to Base64
 // Test
