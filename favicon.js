@@ -17,11 +17,15 @@ async function getHTML(url) {
 }
 
 // 1. Get favicons in website
-function getFavicons() {
-    const links = document.querySelectorAll('link[rel*=icon]')
+// You should pass document as parameter,
+//  if you want to use it in the browser console.
+// For example: getFavicons(document, document.URL)
+function getFavicons(html, url) {
+    const links = html.querySelectorAll('link[rel*=icon]')
     const favicons = [...links].map(link => {
-        const href = link.href
-        const origin = new URL(document.URL).origin
+        // link.href will prefix extension url for browser extensions
+        const href = link.getAttribute('href')
+        const origin = new URL(url).origin
 
         if (isURL(href)) return href
         if (href.startsWith('//')) return 'https:' + href
