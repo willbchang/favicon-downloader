@@ -8,6 +8,7 @@
  */
 
 // 0. Get HTML from url
+// Alternative, only if you want to use it in browser extension or server.
 async function getHTML(url) {
     const response = await fetch(url)
     const text = await response.text()
@@ -66,7 +67,7 @@ function sortFavicons(favicons) {
     }
 }
 
-// 3. Convert Favicons to Base64
+// 3. Convert favicon from url to Base64
 async function toBase64(favicon) {
     const response = await fetch(favicon)
     const blob = await response.blob()
@@ -83,6 +84,7 @@ async function toBase64(favicon) {
     }
 }
 
+// Main function
 export async function getFavicon(url) {
     try {
         const html = await getHTML(url)
