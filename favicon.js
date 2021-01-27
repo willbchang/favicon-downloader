@@ -54,7 +54,7 @@ function sortFavicons(favicons) {
         if (favicon.includes('favicon')) priority += 1
         if (favicon.includes('32')) priority += 1
 
-        return {href: favicon, priority}
+        return {url: favicon, priority}
     }
 
     function byPriority(a, b) {
@@ -62,7 +62,7 @@ function sortFavicons(favicons) {
     }
 
     function removePriority(favicon) {
-        return favicon.href
+        return favicon.url
     }
 }
 
