@@ -13,6 +13,7 @@ async function getHTML(url) {
     const text = await response.text()
     const parser = new DOMParser()
     const html = parser.parseFromString(text, 'text/html');
+
     return html
 }
 
@@ -30,6 +31,7 @@ function getFavicons(html, url) {
         if (isURL(href)) return href
         if (href.startsWith('//')) return 'https:' + href
         if (href.startsWith('/')) return origin + href
+
         return origin + '/' + href
     })
 
@@ -68,6 +70,7 @@ function sortFavicons(favicons) {
 async function toBase64(favicon) {
     const response = await fetch(favicon)
     const blob = await response.blob()
+
     return await fileReader(blob)
 
     async function fileReader(blob) {
