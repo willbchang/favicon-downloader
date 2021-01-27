@@ -61,8 +61,8 @@ function sortFavicons(favicons) {
         return b.priority - a.priority
     }
 
-    function removePriority(favicon) {
-        return favicon.url
+    function removePriority({url}) {
+        return url
     }
 }
 
