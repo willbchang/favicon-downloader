@@ -101,3 +101,23 @@ export async function getFavicon(url) {
 }
 
 // Test
+export function test(urls) {
+    urls.map(async url => {
+        const favicon = await getFavicon(url)
+        console.log(url, favicon)
+        // window.open(favicon);
+    })
+}
+
+const urls = [
+        "https://github.com",
+        "https://jquery.com",
+        "https://pixabay.com",
+        "https://willbc.cn",
+        "not a url",
+        "https://unavaliable.com",
+        "https://stackoverflow.com/questions/61212"
+]
+
+// Uncomment this to test
+//test(urls)
