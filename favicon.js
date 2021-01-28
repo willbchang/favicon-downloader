@@ -70,8 +70,8 @@ export function sortFavicons(favicons) {
 }
 
 // 3. Convert favicon from url to Base64
-export async function toBase64(favicon) {
-    const response = await fetch(favicon)
+export async function toBase64(faviconURL) {
+    const response = await fetch(faviconURL)
     const blob = await response.blob()
     const faviconBase64 = await fileReader(blob)
 
