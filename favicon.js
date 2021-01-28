@@ -46,7 +46,7 @@ export function getFaviconURLs(html, url) {
 }
 
 // 2. Sort Favicons by name and quality.
-export function sortFavicons(favicons) {
+export function sortByPriority(favicons) {
     return favicons
         .map(assignPriority)
         .sort(byPriority)
@@ -92,7 +92,7 @@ export async function getFavicon(url) {
     try {
         const html = await getHTML(url)
         let favicons = getFaviconURLs(html, url)
-        favicons = sortFavicons(favicons)
+        favicons = sortByPriority(favicons)
         // You can return the URL if you need.
         const faviconURL = favicons[0]
         const faviconBase64 = await getDataURL(faviconURL)
