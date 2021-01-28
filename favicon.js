@@ -73,8 +73,9 @@ export function sortFavicons(favicons) {
 export async function toBase64(favicon) {
     const response = await fetch(favicon)
     const blob = await response.blob()
+    const faviconBase64 = await fileReader(blob)
 
-    return await fileReader(blob)
+    return faviconBase64
 
     async function fileReader(blob) {
         return new Promise((resolve, reject) => {
