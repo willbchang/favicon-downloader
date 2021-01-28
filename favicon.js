@@ -91,10 +91,10 @@ export async function getDataURL(faviconURL) {
 export async function getFavicon(url) {
     try {
         const html = await getHTML(url)
-        let favicons = getFaviconURLs(html, url)
-        favicons = sortByPriority(favicons)
+        let faviconURLs = getFaviconURLs(html, url)
+        faviconURLs = sortByPriority(faviconURLs)
         // You can return the URL if you need.
-        const faviconURL = favicons[0]
+        const faviconURL = faviconURLs[0]
         const faviconDataURL = await getDataURL(faviconURL)
 
         return faviconDataURL
