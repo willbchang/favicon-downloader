@@ -24,7 +24,11 @@ export async function getHTML(url) {
 // For example: getFavicons(document, document.URL)
 export function getFavicons(html, url) {
     const links = html.querySelectorAll('link[rel*=icon]')
-    const favicons = [...links].map(link => {
+    const favicons = [...links].map(getFaviconURL)
+
+    return favicons
+
+    function getFaviconURL(link) {
         // link.href will prefix extension url for browser extensions
         const href = link.getAttribute('href')
         const origin = new URL(url).origin
@@ -34,9 +38,7 @@ export function getFavicons(html, url) {
         if (href.startsWith('/')) return origin + href
 
         return origin + '/' + href
-    })
-
-    return favicons
+    }
 
     function isURL(url) {
         return /^https?:\/\//.test(url)
