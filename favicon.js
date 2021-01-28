@@ -24,9 +24,9 @@ export async function getHTML(url) {
 // For example: getFavicons(document, document.URL)
 export function getFavicons(html, url) {
     const links = html.querySelectorAll('link[rel*=icon]')
-    const favicons = [...links].map(getFaviconURL)
+    const faviconURLs = [...links].map(getFaviconURL)
 
-    return favicons
+    return faviconURLs
 
     function getFaviconURL(link) {
         // link.href will prefix extension url for browser extensions
