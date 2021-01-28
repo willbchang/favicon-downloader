@@ -13,7 +13,7 @@ export async function getHTML(url) {
     const response = await fetch(url)
     const text = await response.text()
     const parser = new DOMParser()
-    const html = parser.parseFromString(text, 'text/html');
+    const html = parser.parseFromString(text, 'text/html')
 
     return html
 }
@@ -69,8 +69,8 @@ export function sortFavicons(favicons) {
     }
 }
 
-// 3. Convert favicon from url to Base64
-export async function toBase64(faviconURL) {
+// 3. Convert favicon from url to Base64 data url
+export async function getDataURL(faviconURL) {
     const response = await fetch(faviconURL)
     const blob = await response.blob()
     const faviconBase64 = await fileReader(blob)
@@ -95,7 +95,7 @@ export async function getFavicon(url) {
         favicons = sortFavicons(favicons)
         // You can return the URL if you need.
         const faviconURL = favicons[0]
-        const faviconBase64 = await toBase64(faviconURL)
+        const faviconBase64 = await getDataURL(faviconURL)
 
         return faviconBase64
     } catch(_) {
@@ -110,7 +110,7 @@ export function test(urls) {
     urls.map(async url => {
         const favicon = await getFavicon(url)
         console.log(url, favicon)
-        // window.open(favicon);
+        // window.open(favicon)
     })
 }
 
