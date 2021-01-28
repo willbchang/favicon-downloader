@@ -21,8 +21,8 @@ export async function getHTML(url) {
 // 1. Get favicons in website
 // You should pass document as parameter,
 //  if you want to use it in the browser console.
-// For example: getFavicons(document, document.URL)
-export function getFavicons(html, url) {
+// For example: getFaviconURLs(document, document.URL)
+export function getFaviconURLs(html, url) {
     const links = html.querySelectorAll('link[rel*=icon]')
     const faviconURLs = [...links].map(getFaviconURL)
 
@@ -90,7 +90,7 @@ export async function toBase64(favicon) {
 export async function getFavicon(url) {
     try {
         const html = await getHTML(url)
-        let favicons = getFavicons(html, url)
+        let favicons = getFaviconURLs(html, url)
         favicons = sortFavicons(favicons)
         // You can return the URL if you need.
         const faviconURL = favicons[0]
