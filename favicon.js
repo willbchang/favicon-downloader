@@ -73,11 +73,11 @@ export function sortFavicons(favicons) {
 export async function getDataURL(faviconURL) {
     const response = await fetch(faviconURL)
     const blob = await response.blob()
-    const dataURL = await fileReader(blob)
+    const dataURL = await toDataURL(blob)
 
     return dataURL
 
-    async function fileReader(blob) {
+    async function toDataURL(blob) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader()
             reader.onloadend = () => resolve(reader.result)
