@@ -9,7 +9,7 @@
 
 // 0. Get HTML from url
 // Alternative, only if you want to use it in browser extension or server.
-async function getHTML(url) {
+export async function getHTML(url) {
     const response = await fetch(url)
     const text = await response.text()
     const parser = new DOMParser()
@@ -22,7 +22,7 @@ async function getHTML(url) {
 // You should pass document as parameter,
 //  if you want to use it in the browser console.
 // For example: getFavicons(document, document.URL)
-function getFavicons(html, url) {
+export function getFavicons(html, url) {
     const links = html.querySelectorAll('link[rel*=icon]')
     const favicons = [...links].map(link => {
         // link.href will prefix extension url for browser extensions
@@ -44,7 +44,7 @@ function getFavicons(html, url) {
 }
 
 // 2. Sort Favicons by name and quality.
-function sortFavicons(favicons) {
+export function sortFavicons(favicons) {
     return favicons
         .map(assignPriority)
         .sort(byPriority)
@@ -68,7 +68,7 @@ function sortFavicons(favicons) {
 }
 
 // 3. Convert favicon from url to Base64
-async function toBase64(favicon) {
+export async function toBase64(favicon) {
     const response = await fetch(favicon)
     const blob = await response.blob()
 
