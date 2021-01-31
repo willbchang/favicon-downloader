@@ -7,6 +7,13 @@
  * | https://willbc.cn    | assets/images/favicon.png                                      |
  */
 
+
+export async function getFaviconIcoUrl(url) {
+    const faviconIcoUrl = new URL(url).origin + '/favicon.ico'
+    const response = await fetch(faviconIcoUrl)
+    return response.status === 200 ? faviconIcoUrl : ''
+}
+
 // 0. Get HTML from url
 // Alternative, only if you want to use it in browser extension or server.
 // It may not work in the browser console due to cors
@@ -93,11 +100,14 @@ export const fallbackSVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" 
 // Example
 export async function getFaviconDataURL(url) {
     try {
+        let faviconURL = await getFaviconIcoUrl(url)
+        if (faviconURL !== '') return faviconURL
+
         const html = await getHTML(url)
         let faviconURLs = getFaviconURLs(html, url)
         faviconURLs = sortByPriority(faviconURLs)
         // You can return the URL if you need.
-        const faviconURL = faviconURLs[0]
+        faviconURL = faviconURLs[0]
         const faviconDataURL = await getDataURL(faviconURL)
 
         return faviconDataURL
@@ -122,8 +132,9 @@ const urls = [
         "https://willbc.cn",
         "not a url",
         "https://unavaliable.com", // This URL takes time to get result.
-        "https://stackoverflow.com/questions/61212"
+        "https://stackoverflow.com/questions/61212",
+        "https://www.google.com/search?q=safari+read+later"
 ]
 
 // Uncomment the code below to test
-//test(urls)
+// test(urls)
