@@ -125,7 +125,7 @@ export async function getFaviconURL(url) {
         // const faviconDataURL = await getDataURL(faviconURL)
 
         return faviconURL
-    } catch(_) {
+    } catch (_) {
         return fallbackSVG
     }
 }
@@ -140,14 +140,14 @@ export function test(urls) {
 }
 
 const urls = [
-        "https://github.com",
-        "https://jquery.com",
-        "https://pixabay.com",
-        "https://willbc.cn",
-        "not a url",
-        "https://unavaliable.com", // This URL takes time to get result.
-        "https://stackoverflow.com/questions/61212",
-        "https://www.google.com/search?q=safari+read+later"
+    "https://github.com",
+    "https://jquery.com",
+    "https://pixabay.com",
+    "https://willbc.cn",
+    "not a url",
+    "https://unavaliable.com", // This URL takes time to get result.
+    "https://stackoverflow.com/questions/61212",
+    "https://www.google.com/search?q=safari+read+later",
 ]
 
 // Uncomment the code below to test
