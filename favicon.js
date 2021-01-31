@@ -1,4 +1,22 @@
 /*
+ * | Index | Approaches            | Websites           |
+ * |-------+-----------------------+--------------------|
+ * |     1 | favicon.ico           | https://github.com |
+ * |     2 | <link rel*="icon">    | https://github.com |
+ * |     3 | manifest.json         | https://github.com |
+ * |     4 | browserconfig.xml     |                    |
+ */
+
+// 1. Get favicon from favicon.ico
+// e.g. https://github.com/favicon.ico
+export async function getFaviconIcoUrl(url) {
+    const faviconIcoUrl = new URL(url).origin + '/favicon.ico'
+    const response = await fetch(faviconIcoUrl)
+    return response.status === 200 ? faviconIcoUrl : ''
+}
+
+// 2.  Get favicons in <link>
+/*
  * | Websites             | Favicon href values                                            |
  * |----------------------+----------------------------------------------------------------|
  * | https://github.com   | https://github.githubassets.com/favicons/favicon.png           |
@@ -7,16 +25,15 @@
  * | https://willbc.cn    | assets/images/favicon.png                                      |
  */
 
+// Note: A simple way to work in the browser console.
+// function getFaviconURLs() {
+//     const links = document.querySelectorAll('link[rel*=icon]')
+//     return [...links].map(link => link.href)
+// }
 
-export async function getFaviconIcoUrl(url) {
-    const faviconIcoUrl = new URL(url).origin + '/favicon.ico'
-    const response = await fetch(faviconIcoUrl)
-    return response.status === 200 ? faviconIcoUrl : ''
-}
-
-// 0. Get HTML from url
+// 2.1 Get HTML from url
 // Alternative, only if you want to use it in browser extension or server.
-// It may not work in the browser console due to cors
+// It may not work in the browser console.
 export async function getHTML(url) {
     const response = await fetch(url)
     const text = await response.text()
@@ -26,10 +43,7 @@ export async function getHTML(url) {
     return html
 }
 
-// 1. Get favicons in website
-// You should pass document as parameter,
-//  if you want to use it in the browser console.
-// For example: getFaviconURLs(document, document.URL)
+// 2.2 Get favicon urls from HTML
 export function getFaviconURLs(html, url) {
     const links = html.querySelectorAll('link[rel*=icon]')
     const faviconURLs = [...links].map(getFaviconURL)
@@ -53,7 +67,7 @@ export function getFaviconURLs(html, url) {
     }
 }
 
-// 2. Sort Favicons by name and quality.
+// 2.3 Sort Favicons by name and quality.
 export function sortByPriority(favicons) {
     return favicons
         .map(assignPriority)
@@ -77,7 +91,7 @@ export function sortByPriority(favicons) {
     }
 }
 
-// 3. Convert favicon from url to Base64 data url
+// Alternative: Convert favicon from url to Base64 data url
 export async function getDataURL(faviconURL) {
     const response = await fetch(faviconURL)
     const blob = await response.blob()
