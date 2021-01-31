@@ -120,11 +120,11 @@ export async function getFaviconDataURL(url) {
         const html = await getHTML(url)
         let faviconURLs = getFaviconURLs(html, url)
         faviconURLs = sortByPriority(faviconURLs)
-        // You can return the URL if you need.
         faviconURL = faviconURLs[0]
-        const faviconDataURL = await getDataURL(faviconURL)
+        // You can return the DataURL if you need.
+        // const faviconDataURL = await getDataURL(faviconURL)
 
-        return faviconDataURL
+        return faviconURL
     } catch(_) {
         return fallbackSVG
     }
